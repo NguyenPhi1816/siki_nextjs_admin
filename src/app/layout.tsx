@@ -2,10 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import StoreProvider from "@/components/redux/StoreProvider";
-import ThemeRegistry from "../../utils/ThemeRegistry";
 import ModalManager from "@/components/modal/ModalManager";
 import Preload from "@/components/hoc/Preload";
 import TanstackProvider from "@/providers/TanstackProvider";
+import ThemeRegistry from "../../utils/ThemeRegistry";
 
 const inter = Inter({ subsets: ["latin"] });
 
