@@ -1,6 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import StoreProvider from "@/components/redux/StoreProvider";
+import ThemeRegistry from "../../utils/ThemeRegistry";
+import ModalManager from "@/components/modal/ModalManager";
+import Preload from "@/components/hoc/Preload";
+import TanstackProvider from "@/providers/TanstackProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,8 +20,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <StoreProvider>
+      <Preload />
+      <html lang="en">
+        <body className={inter.className}>
+          <TanstackProvider>
+            <ThemeRegistry options={{ key: "mui-theme" }}>
+              <ModalManager />
+              {children}
+            </ThemeRegistry>
+          </TanstackProvider>
+        </body>
+      </html>
+    </StoreProvider>
   );
 }
