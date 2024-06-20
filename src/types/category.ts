@@ -1,7 +1,9 @@
 export interface ICategory {
-  id: number;
-  image: string;
-  name: string;
+  Id: number;
+  Slug: string;
+  Name: string;
+  Image: string;
+  Description: string;
 }
 
 export type CategoryByNameResponse = {
@@ -10,8 +12,16 @@ export type CategoryByNameResponse = {
 };
 
 export type CategoryRequest = {
+  token: string;
   name: string;
   image: string;
   desc: string;
-  parentId: string | null;
+};
+
+export type UpdateCategoryRequest = {
+  token: string;
+  id: number;
+  name: string;
+  image: string;
+  desc: string;
 };

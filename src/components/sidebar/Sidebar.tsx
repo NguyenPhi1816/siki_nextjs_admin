@@ -3,9 +3,14 @@ import { Box } from "@mui/system";
 import { useAppSelector } from "../../../lib/hooks";
 import React from "react";
 import SidebarItem from "./SidebarItem";
-import { Layers } from "@mui/icons-material";
+import { Category, Widgets } from "@mui/icons-material";
 
 const Sidebar = () => {
+  const categories = [
+    { id: 1, name: "Danh mục", href: "/category", icon: <Category /> },
+    { id: 2, name: "Sản phẩm", href: "/products", icon: <Widgets /> },
+  ];
+
   return (
     <Box
       sx={{
@@ -20,9 +25,19 @@ const Sidebar = () => {
     >
       <Box sx={{ bgcolor: "var(--bg-white)", height: "100%", borderRadius: 1 }}>
         <List sx={{ padding: "1rem" }}>
-          <ListItem disablePadding>
-            <SidebarItem href="/category" icon={<Layers />} title="Danh mục" />
-          </ListItem>
+          {categories.map((item) => (
+            <ListItem
+              disablePadding
+              sx={{ marginBottom: "0.5rem" }}
+              key={item.id}
+            >
+              <SidebarItem
+                href={item.href}
+                icon={item.icon}
+                title={item.name}
+              />
+            </ListItem>
+          ))}
         </List>
       </Box>
     </Box>

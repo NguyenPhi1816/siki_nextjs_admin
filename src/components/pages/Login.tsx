@@ -34,10 +34,13 @@ const SignInForm = () => {
   const handleLogin = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
-    const email = formData.get("email");
+    const phoneNumber = formData.get("phoneNumber");
     const password = formData.get("password");
-    if (email && password) {
-      await signIn({ email: email.toString(), password: password.toString() });
+    if (phoneNumber && password) {
+      await signIn({
+        phoneNumber: phoneNumber.toString(),
+        password: password.toString(),
+      });
     }
   };
 
@@ -50,18 +53,19 @@ const SignInForm = () => {
         }
         dispatch(
           setTokens({
+            isLoaded: true,
             accessToken: myRes.access_token,
             refreshToken: myRes.refresh_token,
           })
         );
       };
-
       storeData();
       redirect("/");
     } else if (error) {
       const myErr = error as FetchBaseQueryError;
       const myErrData = myErr.data as SignInError;
-      setErrorMessage(myErrData.error_description);
+      console.log(myErrData);
+      setErrorMessage(myErrData.message);
     }
   }, [data, error]);
 
@@ -124,9 +128,9 @@ const SignInForm = () => {
               error={errorMessage !== ""}
               required
               fullWidth
-              id="email"
-              label="Email"
-              name="email"
+              id="phoneNumber"
+              label="Số điện thoại"
+              name="phoneNumber"
               onFocus={handleClearMessage}
             />
             <TextField

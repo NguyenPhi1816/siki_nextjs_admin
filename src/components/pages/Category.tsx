@@ -1,33 +1,20 @@
 "use client";
 import { Box, Button, List, ListItem, Typography } from "@mui/material";
 import { useGetCategoriesQuery } from "../../../lib/features/category/categoryApi";
-import CategoryParent from "../category/CategoryParent";
 import { Dispatch } from "@reduxjs/toolkit";
 import { useAppDispatch } from "../../../lib/hooks";
 import { ModalType, openModal } from "../../../lib/features/modal/ModalSlice";
 import WithProtectedRoute from "../hoc/WithProtectedRoute";
-import { useQuery } from "@tanstack/react-query";
-import { ICategory } from "@/types/category";
+import CategoryItem from "../category/CategoryItem";
 
 const Category = () => {
   const dispatch: Dispatch = useAppDispatch();
-  // const { data, error, isLoading, refetch } = useGetCategoriesQuery();
-
-  const { data, isLoading, isError, isSuccess } = useQuery<ICategory[]>({
-    queryKey: ["categories"],
-    queryFn: () =>
-      fetch("http://localhost:8090/api/products/category/parents").then((res) =>
-        res.json()
-      ),
-  });
-
-  console.log(data);
+  const { data, error, isLoading, refetch } = useGetCategoriesQuery();
 
   const handleShowAddModal = () => {
     dispatch(
       openModal({
         modalType: ModalType.addCategory,
-        modalProps: { parentId: undefined },
       })
     );
   };
@@ -72,8 +59,8 @@ const Category = () => {
       >
         {data &&
           data.map((item) => (
-            <ListItem key={item.id}>
-              <CategoryParent data={item} />
+            <ListItem key={item.Id}>
+              <CategoryItem data={item} />
             </ListItem>
           ))}
       </List>

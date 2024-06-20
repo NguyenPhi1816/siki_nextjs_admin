@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export enum ModalType {
   addCategory,
+  editCategory,
+  addProduct,
 }
 
 export enum CloseAction {

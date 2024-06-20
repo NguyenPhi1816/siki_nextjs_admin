@@ -6,9 +6,15 @@ import { AuthState } from "../../../lib/features/auth/authSlice";
 const Preload = async () => {
   const cookieStore = cookies();
   const res = cookieStore.get("siki");
-  const tokens: AuthState = { accessToken: null, refreshToken: null };
-  if (res) {
+  const tokens: AuthState = {
+    isLoaded: false,
+    accessToken: null,
+    refreshToken: null,
+  };
+
+  if (!!res) {
     const data = JSON.parse(res.value);
+    tokens.isLoaded = true;
     tokens.accessToken = data.access_token;
     tokens.refreshToken = data.refresh_token;
   }
