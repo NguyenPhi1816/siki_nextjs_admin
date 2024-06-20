@@ -141,6 +141,7 @@ const SignInForm = () => {
               label="Mật khẩu"
               type={showPassword ? "text" : "password"}
               id="password"
+              data-testid="password"
               onFocus={handleClearMessage}
               sx={{ mt: 2 }}
               InputProps={{
