@@ -167,7 +167,7 @@ const SignInForm = () => {
                   onClick={() => setIsRemember((prev) => !prev)}
                 />
               }
-              label="Ghi nhớ đăng nhập"
+              label="Ghi nhớ đăng nhập nha"
             />
             {errorMessage !== "" && (
               <Typography fontSize={"0.875rem"} color="var(--text-error)">
