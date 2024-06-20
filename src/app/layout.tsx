@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <StoreProvider>
-      <Preload />
+      {/* <Preload /> */}
       <html lang="en">
         <body className={inter.className}>
           <TanstackProvider>
